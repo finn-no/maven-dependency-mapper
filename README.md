@@ -17,7 +17,7 @@ Override neo4j server setting with -Dneo4jServer=http://yourserver:yourport, def
 Example output:
 ---------------
 mvn no.finntech:maven-dependency-mapper:1.0-SNAPSHOT:read 
-[INFO] Scanning for projects...
+`[INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
 [INFO] Building greenpages thrift-client 3.4.5-SNAPSHOT
@@ -63,6 +63,5 @@ mvn no.finntech:maven-dependency-mapper:1.0-SNAPSHOT:read
 [INFO] Total time: 1.957s
 [INFO] Finished at: Thu Jan 31 09:50:19 CET 2013
 [INFO] Final Memory: 9M/211M
-[INFO] ------------------------------------------------------------------------
-
+[INFO] ------------------------------------------------------------------------`
 
