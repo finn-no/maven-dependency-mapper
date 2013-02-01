@@ -8,15 +8,15 @@ Local environment:
 * install neo4j http://www.neo4j.org/develop#install
 * checkout this repo
 * mvn install
-* Go to a maven project and run "mvn no.finntech:maven-dependency-mapper:1.0-SNAPSHOT:store"
-* Do a ""mvn no.finntech:maven-dependency-mapper:1.0-SNAPSHOT:read"
+* Go to a maven project and run "mvn no.finntech:dependency-mapper-maven-plugin:1.0-SNAPSHOT:store"
+* Do a "mvn no.finntech:dependency-mapper-maven-plugin:1.0-SNAPSHOT:read"
 
 Override neo4j server setting with -Dneo4jServer=http://yourserver:yourport, defaults to http://localhost:7474
 
 
 Example output:
 ---------------
-mvn no.finntech:maven-dependency-mapper:1.0-SNAPSHOT:read 
+mvn no.finntech:dependency-mapper-maven-plugin:1.0-SNAPSHOT:read 
 <pre>
 [INFO] Scanning for projects...
 [INFO]                                                                         
@@ -24,7 +24,7 @@ mvn no.finntech:maven-dependency-mapper:1.0-SNAPSHOT:read
 [INFO] Building greenpages thrift-client 3.4.5-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
 [INFO] 
-[INFO] --- maven-dependency-mapper:1.0-SNAPSHOT:read (default-cli) @ commons-thrift-client ---
+[INFO] --- dependency-mapper-maven-plugin:1.0-SNAPSHOT:read (default-cli) @ commons-thrift-client ---
 [INFO] Resolving reverse dependencies
 [INFO] no.finntech.travel.supplier:supplier-client:1.2-SNAPSHOT -> no.finntech:commons-thrift-client:3.1.1
 [INFO] no.finntech.cop:client:1.1-SNAPSHOT -> no.finntech:commons-thrift-client:3.1.1
@@ -67,3 +67,17 @@ mvn no.finntech:maven-dependency-mapper:1.0-SNAPSHOT:read
 [INFO] ------------------------------------------------------------------------
 </pre>
 
+To include this in your project:
+--------------------------------
+put this in you pom.xml
+
+    <plugin>
+        <groupId>no.finntech</groupId>
+        <artifactId>dependency-mapper-maven-plugin</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <configuration>
+            <neo4jServer>http://neo4jServer:7474</neo4jServer>
+        </configuration>
+    </plugin>
+
+Now you can use the plugin with mvn dependency-mapper:store and mvn dependency-mapper:read

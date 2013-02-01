@@ -22,7 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>no.finntech</groupId>
-    <artifactId>maven-dependency-mapper</artifactId>
+    <artifactId>dependency-mapper-maven-plugin</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
