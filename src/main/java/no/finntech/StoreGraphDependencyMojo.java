@@ -26,6 +26,7 @@ import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
+import org.neo4j.graphdb.Direction;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.rest.graphdb.RestAPI;
@@ -86,7 +87,7 @@ public class StoreGraphDependencyMojo
 
     private void getDependencies() {
         Node projectNode = makeNode(project.getArtifact());
-        for(Relationship r:projectNode.getRelationships()){
+        for(Relationship r:projectNode.getRelationships(Direction.OUTGOING)){
             r.delete();
         }
         if (project.getParentArtifact() != null) {
