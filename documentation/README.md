@@ -1,6 +1,5 @@
 ## Running analysis on project
 
-
 ```
 cd documentation/dependency-test/project1
 $ mvn dependency-mapper:read
@@ -27,6 +26,18 @@ $ mvn dependency-mapper:read
 [INFO] Final Memory: 5M/15M
 [INFO] ------------------------------------------------------------------------
 ```
+
+## Graph Database screenshots
+
+![dependency graphfor project1](1-dependency-graph-for-project1.png)
+
+![project1 reverse dependencies](2-project1-node.png)
+
+![cyclic dependencies](3-cyclic-dependencies.png)
+
+![cycle detection](4-cycle-detection.png)
+
+![neo4j results table view](5-neo4j-results-table-view.png)
 
 ## CYPHER Queries
 
