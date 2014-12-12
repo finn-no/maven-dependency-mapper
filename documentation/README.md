@@ -1,4 +1,4 @@
-h2. Running analysis on project
+## Running analysis on project
 
 
 ```
@@ -28,7 +28,7 @@ $ mvn dependency-mapper:read
 [INFO] ------------------------------------------------------------------------
 ```
 
-h2. CYPHER Queries
+## CYPHER Queries
 
 Delete all nodes and relations
 
