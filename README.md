@@ -26,7 +26,7 @@ Override neo4j server setting with *-Dneo4jServer=http://yourserver:yourport*, d
 
 ```
 mvn nodependency-mapper:read 
-<pre>
+
 [INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
@@ -39,10 +39,6 @@ mvn nodependency-mapper:read
 [INFO] no.finntech.cop:client:1.1-SNAPSHOT -> no.finntech:commons-thrift-client:3.1.1
 [INFO] no.finntech.oppdrag-services:iad-model:2013.2-SNAPSHOT -> no.finntech:commons-thrift-client:3.4.3
 [INFO] no.finntech:minfinn:2013.2-SNAPSHOT -> no.finntech:commons-thrift-client:3.4.3
-[INFO] no.finntech:service-user:2013.2-SNAPSHOT -> no.finntech:commons-thrift-client:3.4.3
-[INFO] no.finntech:service-oppdrag:2013.2-SNAPSHOT -> no.finntech:commons-thrift-client:3.4.3
-[INFO] no.finntech:kernel:2013.2-SNAPSHOT -> no.finntech:commons-thrift-client:3.4.3
-[INFO] no.finntech.travelstats:travelstats-collector:1.7.6-SNAPSHOT -> no.finntech:commons-thrift-client:3.2.7
 ...
 [INFO] no.finntech.attribute:attribute-client:1.2.3-SNAPSHOT -> no.finntech:commons-thrift-client:3.3
 [INFO] no.finntech.organisation:organisation-client:1.6-SNAPSHOT -> no.finntech:commons-thrift-client:3.4
@@ -53,8 +49,7 @@ mvn nodependency-mapper:read
 [INFO] Finished at: Thu Jan 31 09:50:19 CET 2013
 [INFO] Final Memory: 9M/211M
 [INFO] ------------------------------------------------------------------------
-</pre>
-
+```
 
 ### To include this in your project
 
