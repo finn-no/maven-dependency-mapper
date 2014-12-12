@@ -1,0 +1,33 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.codecentric</groupId>
+	<artifactId>project3</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>de.codecentric</groupId>
+			<artifactId>project1</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+
+	<!-- In real projects you would move this configuration to a parent pom -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>no.finntech</groupId>
+				<artifactId>dependency-mapper-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<neo4jServer>http://localhost:7474</neo4jServer>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

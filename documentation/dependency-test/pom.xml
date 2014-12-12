@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                      http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>de.codecentric</groupId>
+	<artifactId>project-modules</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0</version>
+
+	<modules>
+		<module>project1</module>
+		<module>project2</module>
+		<module>project3</module>
+		<module>project4</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>no.finntech</groupId>
+				<artifactId>dependency-mapper-maven-plugin</artifactId>
+				<version>1.1</version>
+				<configuration>
+					<neo4jServer>http://localhost:7474</neo4jServer>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

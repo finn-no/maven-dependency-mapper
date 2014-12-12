@@ -1,19 +1,3 @@
-/* Copyright (2013) FINN.no AS
-*
-*   This is free software: you can redistribute it and/or modify
-*   it under the terms of the GNU General Public License as published by
-*   the Free Software Foundation, either version 3 of the License, or
-*   (at your option) any later version, with the Classpath Exception.
-*
-*   This program is distributed in the hope that it will be useful,
-*   but WITHOUT ANY WARRANTY; without even the implied warranty of
-*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*   GNU General Public License for more details.
-*
-*   You should have received a copy of the GNU General Public License
-*   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
 package no.finntech;
 
 import org.apache.maven.plugin.AbstractMojo;
@@ -37,14 +21,12 @@ import org.neo4j.rest.graphdb.index.RestIndex;
  *
  * @threadSafe
  */
-public class ReverseDependencyMojo extends AbstractMojo{
+public class ReverseDependencyMojo extends AbstractMojo {
 
     private static final String GROUP_ID_AND_ARTIFACT_ID = "groupIdAndArtifactId";
     private static final String PRETTY_PRINT = "prettyPrint";
 
     /**
-     *
-     *
      * @parameter expression="${project}"
      * @required
      * @readonly
@@ -53,36 +35,32 @@ public class ReverseDependencyMojo extends AbstractMojo{
 
     /**
      * Neo4J Server.
-     * @parameter
-     *   expression="${neo4jServer}"
-     *   default-value="http://localhost:7474"
+     * 
+     * @parameter expression="${neo4jServer}" default-value="http://localhost:7474"
      */
     private String neo4jServer;
 
-    RestAPI restAPI;
-
+    private RestAPI restAPI;
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getLog().info("Resolving reverse dependencies");
-        restAPI = new RestAPIFacade(neo4jServer + "/db/data");
-        listDependants();
+	getLog().info("Resolving reverse dependencies");
+	restAPI = new RestAPIFacade(neo4jServer + "/db/data");
+	listDependants();
     }
 
-    private void listDependants(){
-        final RestIndex<RestNode> index = restAPI.getIndex("artifact");
-        final IndexHits<RestNode> nodes = index.query(GROUP_ID_AND_ARTIFACT_ID, ArtifactHelper.getGroupIdAndArtifactId(project.getArtifact()));
-        for (RestNode node : nodes) {
-            listNodeDependants(node);
-        }
-
+    private void listDependants() {
+	final RestIndex<RestNode> index = restAPI.getIndex("artifact");
+	final IndexHits<RestNode> nodes = index.query(GROUP_ID_AND_ARTIFACT_ID, ArtifactHelper.getGroupIdAndArtifactId(project.getArtifact()));
+	for (RestNode node : nodes) {
+	    listNodeDependants(node);
+	}
     }
 
     private void listNodeDependants(RestNode dependency) {
-        for (Relationship r : dependency.getRelationships(Direction.INCOMING)) {
-            getLog().info(r.getStartNode().getProperty(PRETTY_PRINT) + " -> " + r.getEndNode().getProperty(PRETTY_PRINT));
-        }
+	for (Relationship r : dependency.getRelationships(Direction.INCOMING)) {
+	    getLog().info(r.getStartNode().getProperty(PRETTY_PRINT) + " -> " + r.getEndNode().getProperty(PRETTY_PRINT));
+	}
     }
-
 
 }
