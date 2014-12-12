@@ -1,4 +1,8 @@
-marcel.birkner@MARCELBIRKNER /cygdrive/e/WINDOWS/Development/workspaces/dependency-test/project1
+h2. Running analysis on project
+
+
+```
+cd documentation/dependency-test/project1
 $ mvn dependency-mapper:read
 [INFO] Scanning for projects...
 [INFO]
@@ -22,33 +26,47 @@ $ mvn dependency-mapper:read
 [INFO] Finished at: Wed Dec 03 08:55:42 CET 2014
 [INFO] Final Memory: 5M/15M
 [INFO] ------------------------------------------------------------------------
+```
 
-CYPHER Queries
----------------------------------------
+h2. CYPHER Queries
 
-# Delete all nodes and relations
+Delete all nodes and relations
+
+```
 MATCH (n)
 OPTIONAL MATCH (n)-[r]-()
 DELETE n,r
+```
 
-# Get all projects that have a 'COMPILE' dependency on 'project1' by name
+Get all projects that have a 'COMPILE' dependency on 'project1' by name
+
+```
 MATCH (n)-[:COMPILE]-(dependencies) 
 WHERE n.name = "de.codecentric:project1:1.0" 
 RETURN n, dependencies
+```
 
-# Get all projects that have a 'COMPILE' dependency on 'project1' by groupId and artifactId
+Get all projects that have a 'COMPILE' dependency on 'project1' by groupId and artifactId
+
+```
 MATCH (n)-[:COMPILE]-(dependencies)
 WHERE n.groupId = "de.codecentric" 
 AND n.artifactId = "project1" 
 RETURN n, dependencies
+```
 
-# Get all cycles for COMPILE dependencies
+Get all cycles for COMPILE dependencies
+
+```
 START n = node(*)
 MATCH p =  n-[:COMPILE*]->n
 RETURN p
+```
 
-# Get all cycles for COMPILE dependencies
+Get all cycles for COMPILE dependencies
+
+```
 START n = node(*)
 MATCH p =  n-[:COMPILE|RUNTIME|PRODIVDED|TEST*]->n
 RETURN p
-
+```
