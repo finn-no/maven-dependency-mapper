@@ -31,7 +31,7 @@ public class ArtifactHelper {
         return artifact.getGroupId() + ":"+ artifact.getArtifactId()+ ":" + artifact.getVersion();
     }
 
-     public static String getId(Dependency dependency){
+    public static String getId(Dependency dependency){
         return dependency.getGroupId() + ":"+ dependency.getArtifactId()+ ":" + dependency.getVersion();
     }
 
@@ -46,7 +46,7 @@ public class ArtifactHelper {
         return propertyMap;
     }
 
-        public static Map<String,Object> getProperties(Dependency dependency){
+    public static Map<String,Object> getProperties(Dependency dependency){
         Map  propertyMap = new HashMap<String,Object>();
         propertyMap.put("name",getId(dependency));
         propertyMap.put("groupId",dependency.getGroupId());
