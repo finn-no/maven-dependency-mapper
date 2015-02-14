@@ -78,6 +78,6 @@ Get all cycles for COMPILE dependencies
 
 ```
 START n = node(*)
-MATCH p =  n-[:COMPILE|RUNTIME|PRODIVDED|TEST*]->n
+MATCH p =  n-[:COMPILE|RUNTIME|PROVIDED|TEST*]->n
 RETURN p
 ```
