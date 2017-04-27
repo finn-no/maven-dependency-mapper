@@ -32,9 +32,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mavenVersion>2.0</mavenVersion>
         <version.jdk>1.6</version.jdk>
-        <neo4j.version>1.8</neo4j.version>
+        <maven.version>2.2.1</maven.version>
+        <neo4j.version>2.0.1</neo4j.version>
+        <spring.version>4.1.2.RELEASE</spring.version>
+        <hamcrest.version>1.1</hamcrest.version>
+        <junit.version>4.8.2</junit.version>
+        <mockito.version>1.8.5</mockito.version>
     </properties>
 
 	<dependencies>

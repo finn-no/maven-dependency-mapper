@@ -67,11 +67,7 @@ public class StoreGraphDependencyMojo
 
     RestAPI restAPI;
 
-
-
-
-    public void execute()
-            throws MojoExecutionException {
+    public void execute() throws MojoExecutionException {
         final HashMap<String, String> config = new HashMap<String, String>();
         restAPI = new RestAPIFacade(neo4jServer + "/db/data");
 

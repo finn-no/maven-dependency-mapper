@@ -22,11 +22,11 @@ public class ArtifactHelper {
 
     private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
-    private static String getId(Artifact artifact) {
+    public static String getId(Artifact artifact) {
         return artifact.getGroupId() + COLON + artifact.getArtifactId() + COLON + artifact.getVersion();
     }
 
-    private static String getId(Dependency dependency) {
+    public static String getId(Dependency dependency) {
         return dependency.getGroupId() + COLON + dependency.getArtifactId() + COLON + dependency.getVersion();
     }
 
