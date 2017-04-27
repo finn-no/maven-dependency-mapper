@@ -49,8 +49,8 @@ public class StoreGraphDependencyMojo extends AbstractMojo {
     RestAPI restAPI;
 
     public void execute() throws MojoExecutionException {
-	final HashMap<String, String> config = new HashMap<String, String>();
-	restAPI = new RestAPIFacade(neo4jServer + "/db/data");
+    final HashMap<String, String> config = new HashMap<String, String>();
+    restAPI = new RestAPIFacade(neo4jServer + "/db/data");
 
 	config.put("type", "exact");
 	config.put("provider", "lucene");
