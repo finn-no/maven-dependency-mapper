@@ -7,23 +7,26 @@ Local environment:
 ------------------
 * install neo4j http://www.neo4j.org/develop#install
 * checkout this repo
-* mvn install
+    * mvn install
 * Go to a maven project and run "mvn no.finntech:dependency-mapper-maven-plugin:1.0-SNAPSHOT:store"
 * Do a "mvn no.finntech:dependency-mapper-maven-plugin:1.0-SNAPSHOT:read"
 
-Override neo4j server setting with -Dneo4jServer=http://yourserver:yourport, defaults to http://localhost:7474
+Override neo4j server setting with `-Dneo4jServer=http://yourserver:yourport`, defaults to `http://localhost:7474`
+
+Optional authentication:
+`-Dneo4jUser` and `-Dneo4jPass`
 
 
 Example output:
 ---------------
-mvn no.finntech:dependency-mapper-maven-plugin:1.0-SNAPSHOT:read 
+mvn no.finntech:dependency-mapper-maven-plugin:1.0-SNAPSHOT:read
 <pre>
 [INFO] Scanning for projects...
-[INFO]                                                                         
+[INFO]
 [INFO] ------------------------------------------------------------------------
 [INFO] Building greenpages thrift-client 3.4.5-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
-[INFO] 
+[INFO]
 [INFO] --- dependency-mapper-maven-plugin:1.0-SNAPSHOT:read (default-cli) @ commons-thrift-client ---
 [INFO] Resolving reverse dependencies
 [INFO] no.finntech.travel.supplier:supplier-client:1.2-SNAPSHOT -> no.finntech:commons-thrift-client:3.1.1

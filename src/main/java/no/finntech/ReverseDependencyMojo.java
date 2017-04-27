@@ -59,13 +59,33 @@ public class ReverseDependencyMojo extends AbstractMojo{
      */
     private String neo4jServer;
 
+    /**
+     * Neo4J username.
+     * @parameter
+     *   expression="${neo4jUser}"
+     */
+    private String neo4jUser;
+
+    /**
+     * Neo4J password.
+     * @parameter
+     *   expression="${neo4jPass}"
+     */
+    private String neo4jPass;
+
     RestAPI restAPI;
 
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info("Resolving reverse dependencies");
-        restAPI = new RestAPIFacade(neo4jServer + "/db/data");
+
+        if (neo4jUser == null) {
+            restAPI = new RestAPIFacade(neo4jServer + "/db/data");
+        } else {
+            restAPI = new RestAPIFacade(neo4jServer + "/db/data", neo4jUser, neo4jPass);
+        }
+
         listDependants();
     }
 
