@@ -1,4 +1,21 @@
+/* Copyright (2013) FINN.no AS
+*
+*   This is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version, with the Classpath Exception.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 package no.finntech;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,10 +37,13 @@ import org.neo4j.rest.graphdb.index.RestIndex;
  * Goal which stores dependency trees in neo4j database
  *
  * @goal store
+ *
  * @phase process-sources
+ *
  * @threadSafe
  */
-public class StoreGraphDependencyMojo extends AbstractMojo {
+public class StoreGraphDependencyMojo
+        extends AbstractMojo {
 
     private static final String GROUP_ID_AND_ARTIFACT_ID = "groupIdAndArtifactId";
     private static final String COMPLETE_ID = "completeId";
@@ -39,14 +59,19 @@ public class StoreGraphDependencyMojo extends AbstractMojo {
 
     /**
      * Neo4J Server.
-     *
-     * @parameter expression="${neo4jServer}" default-value="http://localhost:7474"
+     * @parameter
+     *   expression="${neo4jServer}"
+     *   default-value="http://localhost:7474"
      */
     private String neo4jServer;
 
     RestAPI restAPI;
 
-    public void execute() throws MojoExecutionException {
+
+
+
+    public void execute()
+            throws MojoExecutionException {
         final HashMap<String, String> config = new HashMap<String, String>();
         restAPI = new RestAPIFacade(neo4jServer + "/db/data");
 
@@ -63,7 +88,7 @@ public class StoreGraphDependencyMojo extends AbstractMojo {
     @SuppressWarnings("unchecked")
     private void getDependencies() {
         Node projectNode = makeNode(project.getArtifact());
-        for (Relationship r : projectNode.getRelationships(Direction.OUTGOING)) {
+        for(Relationship r:projectNode.getRelationships(Direction.OUTGOING)){
             r.delete();
         }
         if (project.getParentArtifact() != null) {
@@ -106,7 +131,7 @@ public class StoreGraphDependencyMojo extends AbstractMojo {
         try {
             artifactNode = makeNode(dependency);
             projectNode.createRelationshipTo(artifactNode, MavenRelationships.getByName(scope));
-            getLog().info("Registered dependency of scope: " + scope + " [" + dependency.getArtifactId() + "]");
+            getLog().info("Registered dependency to " + ArtifactHelper.getId(dependency) + ", scope: " + scope);
         } catch (Throwable e) {
             getLog().error(e.getMessage(), e);
         }
@@ -122,7 +147,7 @@ public class StoreGraphDependencyMojo extends AbstractMojo {
 
     private void registerDependency(String type, Node projectNode, Artifact artifact) {
         projectNode.createRelationshipTo(makeNode(artifact), MavenRelationships.getByName(type));
-        getLog().info("Registered dependency of scope: " + type + " [" + artifact.getArtifactId() + "]");
+        getLog().info("Registered dependency of scope: " + type);
     }
 
     private void getPlugins() {

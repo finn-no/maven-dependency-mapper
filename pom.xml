@@ -1,27 +1,41 @@
+<!--
+* Copyright (2013) FINN.no AS
+*
+*   This is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version, with the Classpath Exception.
+*
+*   This program is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*
+-->
+
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>no.finntech</groupId>
-	<artifactId>dependency-mapper-maven-plugin</artifactId>
-	<version>1.1</version>
-	<packaging>maven-plugin</packaging>
+    <groupId>no.finntech</groupId>
+    <artifactId>dependency-mapper-maven-plugin</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>maven-plugin</packaging>
 
-	<name>Maven Project Dependency Mapper Plugin</name>
-	<url>http://www.finn.no</url>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <name>Maven dependency mapper plugin</name>
+    <url>http://www.finn.no</url>
 
-		<maven.version>2.2.1</maven.version>
-		<version.jdk>1.6</version.jdk>
-		<neo4j.version>2.0.1</neo4j.version>
-		<spring.version>4.1.2.RELEASE</spring.version>
-
-		<hamcrest.version>1.1</hamcrest.version>
-		<junit.version>4.8.2</junit.version>
-		<mockito.version>1.8.5</mockito.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <mavenVersion>2.0</mavenVersion>
+        <version.jdk>1.6</version.jdk>
+        <neo4j.version>1.8</neo4j.version>
+    </properties>
 
 	<dependencies>
 		<dependency>
@@ -86,69 +100,67 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.5.1</version>
-				<configuration>
-					<source>${version.jdk}</source>
-					<target>${version.jdk}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
-					only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>
-											org.apache.maven.plugins
-										</groupId>
-										<artifactId>
-											maven-plugin-plugin
-										</artifactId>
-										<versionRange>
-											[3.2,)
-										</versionRange>
-										<goals>
-											<goal>descriptor</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 
-	<repositories>
-		<repository>
-			<id>neo4j-release-repository</id>
-			<name>Neo4j Maven 2 release repository</name>
-			<url>http://m2.neo4j.org/content/repositories/releases/</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>${version.jdk}</source>
+                    <target>${version.jdk}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.13</version>
+                <executions>
+                    <execution>
+                        <id>validate</id>
+                        <phase>validate</phase>
+                        <configuration>
+                            <encoding>UTF-8</encoding>
+                            <consoleOutput>true</consoleOutput>
+                            <failsOnError>true</failsOnError>
+                            <checkstyleRules>
+                                <module name="Checker">
+                                    <module name="TreeWalker">
+                                        <module name="Indentation"/>
+                                        <module name="RegexpSinglelineJava">
+                                            <property name="format" value="^[\t]"/>
+                                            <property name="message" value="Expected 4 space indentation, found tab(s)."/>
+                                            <property name="ignoreComments" value="true"/>
+                                        </module>
+                                    </module>
+                                </module>
+                            </checkstyleRules>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+    <repositories>
+
+
+        <repository>
+            <id>neo4j-release-repository</id>
+            <name>Neo4j Maven 2 release repository</name>
+            <url>http://m2.neo4j.org/content/repositories/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+
+    </repositories>
 
 </project>
