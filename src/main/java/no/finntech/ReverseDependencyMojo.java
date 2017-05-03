@@ -43,8 +43,6 @@ public class ReverseDependencyMojo extends AbstractMojo{
     private static final String PRETTY_PRINT = "prettyPrint";
 
     /**
-     *
-     *
      * @parameter expression="${project}"
      * @required
      * @readonly
@@ -53,11 +51,24 @@ public class ReverseDependencyMojo extends AbstractMojo{
 
     /**
      * Neo4J Server.
-     * @parameter
-     *   expression="${neo4jServer}"
-     *   default-value="http://localhost:7474"
+     *
+     * @parameter expression="${neo4jServer}" default-value="http://localhost:7474"
      */
     private String neo4jServer;
+
+    /**
+     * Neo4J username.
+     * @parameter
+     *   expression="${neo4jUser}"
+     */
+    private String neo4jUser;
+
+    /**
+     * Neo4J password.
+     * @parameter
+     *   expression="${neo4jPass}"
+     */
+    private String neo4jPass;
 
     RestAPI restAPI;
 
@@ -65,7 +76,13 @@ public class ReverseDependencyMojo extends AbstractMojo{
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         getLog().info("Resolving reverse dependencies");
-        restAPI = new RestAPIFacade(neo4jServer + "/db/data");
+
+        if (neo4jUser == null) {
+            restAPI = new RestAPIFacade(neo4jServer + "/db/data");
+        } else {
+            restAPI = new RestAPIFacade(neo4jServer + "/db/data", neo4jUser, neo4jPass);
+        }
+
         listDependants();
     }
 
@@ -75,7 +92,6 @@ public class ReverseDependencyMojo extends AbstractMojo{
         for (RestNode node : nodes) {
             listNodeDependants(node);
         }
-
     }
 
     private void listNodeDependants(RestNode dependency) {
@@ -83,6 +99,5 @@ public class ReverseDependencyMojo extends AbstractMojo{
             getLog().info(r.getStartNode().getProperty(PRETTY_PRINT) + " -> " + r.getEndNode().getProperty(PRETTY_PRINT));
         }
     }
-
 
 }
