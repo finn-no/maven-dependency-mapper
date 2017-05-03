@@ -65,11 +65,30 @@ public class StoreGraphDependencyMojo
      */
     private String neo4jServer;
 
+    /**
+     * Neo4J username.
+     * @parameter
+     *   expression="${neo4jUser}"
+     */
+    private String neo4jUser;
+
+    /**
+     * Neo4J password.
+     * @parameter
+     *   expression="${neo4jPass}"
+     */
+    private String neo4jPass;
+
     RestAPI restAPI;
 
     public void execute() throws MojoExecutionException {
         final HashMap<String, String> config = new HashMap<String, String>();
-        restAPI = new RestAPIFacade(neo4jServer + "/db/data");
+
+        if (neo4jUser == null) {
+            restAPI = new RestAPIFacade(neo4jServer + "/db/data");
+        } else {
+            restAPI = new RestAPIFacade(neo4jServer + "/db/data", neo4jUser, neo4jPass);
+        }
 
         config.put("type", "exact");
         config.put("provider", "lucene");

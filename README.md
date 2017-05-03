@@ -1,4 +1,7 @@
-## Maven dependency mapper
+Maven dependency mapper
+=======================
+Stores dependency relationships in a graph database (neo4j)
+-----------------------------------------------------------
 
 * [Example project and Screenshots](documentation/README.md)
 
@@ -20,7 +23,10 @@ mvn dependency-mapper:read
 * Go to a maven project and run *mvn dependency-mapper:store*
 * To find out who is depending on your project do "mvn dependency-mapper:read"
 
-Override neo4j server setting with *-Dneo4jServer=http://yourserver:yourport*, defaults to *http://localhost:7474*
+Override neo4j server setting with `-Dneo4jServer=http://yourserver:yourport`, defaults to `http://localhost:7474`
+
+Optional authentication:
+`-Dneo4jUser` and `-Dneo4jPass`
 
 ### Example output
 
@@ -66,4 +72,4 @@ Put this in you pom.xml
     </plugin>
 ```
 
-Now you can use the plugin with *mvn dependency-mapper:store* and *mvn dependency-mapper:read*
+Now you can use the plugin with mvn dependency-mapper:store and mvn dependency-mapper:read
